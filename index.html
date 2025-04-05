@@ -7,7 +7,27 @@
     <title>Document</title>
 </head>
 <body>
+
+    <header>
     <h1 class="italic flex justify-center text-4xl">Geo Quiz</h1>
+    </header>
+
+    <div class="quiz-container">
+        <div id="quiz">
+            <p class="question" id="question-text">Loading question...</p>
+            <div class="options" id="options-container">
+                <!-- Options will be populated here -->
+            </div>
+        </div>
+
+        <div id="quiz-over">
+            <h2>Quiz Over!</h2>
+            <p id="final-score">Your final score: 0</p>
+            <button class="next-button" onclick="startNewQuiz()">Start New Quiz</button>
+        </div>
+        
+        <div class="score" id="score">Score: 0</div>
+    </div>
 
 </body>
 </html>
