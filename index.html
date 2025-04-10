@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
     <h1 class="italic flex justify-center text-4xl">Geo Quiz</h1>
     </header>
 
-    <div class="quiz-container">
+    <div class="flex flex-col justify-center items-center">
         <div id="quiz">
             <p class="question" id="question-text">Loading question...</p>
             <div class="options" id="options-container">
