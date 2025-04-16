@@ -1,6 +1,7 @@
 let currentScore = 0;
 let currentQuestionIndex = 0;
-let questions = []; 
+let questions = [];
+let askedQuestions = [];
 
 function fetchQuestion() {
     fetch('https://opentdb.com/api.php?amount=10&type=multiple')
@@ -18,39 +19,58 @@ function fetchQuestion() {
              // Loop through the results to extract individual questions and options
              questionsData.forEach(questionData => {
                 const question = questionData.question;
-                console.log("question", question);
+                
+                 // Check if the question has already been asked
+                 if (!askedQuestions.includes(question)) {
+                    console.log("New question:", question);
 
-                const options = [...questionData.incorrect_answers, questionData.correct_answer];
-                console.log("options", options);
+                    const options = [...questionData.incorrect_answers, questionData.correct_answer];
+                    console.log("options", options);
 
-                const correctAnswer = questionData.correct_answer;
+                    const correctAnswer = questionData.correct_answer;
 
-                questions.push({
-                    question: question,
-                    options: options,
-                    correctAnswer: correctAnswer
-                });
+                    questions.push({
+                        question: question,
+                        options: options,
+                        correctAnswer: correctAnswer
+                    });
+
+                    askedQuestions.push(question);
+                 } else {
+                    console.log("Question already asked:", question);
+                 }
             });
-
-            displayQuestion();
+            // If we've got enough questions, start the quiz
+            if (questions.length >= 10) {
+                displayQuestion();
+            } else {
+                 // If not enough new questions, try fetching again
+                fetchQuestion()
+            }
         })
         .catch(err => console.error('Error fetching question:', err));
+}
+
+function decodeHtmlEntities(str) {
+    const doc = new DOMParser().parseFromString(str, 'text/html');
+    return doc.documentElement.textContent;
 }
 
         function displayQuestion() {
             if (currentQuestionIndex < questions.length) {
                 const currentQuestion = questions[currentQuestionIndex];
                 // Display the question text
-                document.getElementById('question-text').textContent = currentQuestion.question.replace(/[^a-z\d\s\-]+/igm, '');
+                document.getElementById('question-text').textContent = decodeHtmlEntities(currentQuestion.question);
 
                 const optionsContainer = document.getElementById('options-container');
-                optionsContainer.innerHTML = ''; // Clear previous options
+                // Clear previous options
+                optionsContainer.innerHTML = '';
 
                 // Create and append each option
                 currentQuestion.options.forEach((option, index) => {
                     const optionElement = document.createElement('div');
                     optionElement.classList.add('option');
-                    optionElement.textContent = option;
+                    optionElement.textContent = decodeHtmlEntities(option);
                     optionElement.onclick = () => checkAnswer(option, currentQuestion.correctAnswer);
                     optionsContainer.appendChild(optionElement);
                 });
@@ -88,6 +108,8 @@ function fetchQuestion() {
             currentQuestionIndex = 0;
             document.getElementById('quiz').style.display = 'block';
             document.getElementById('quiz-over').style.display = 'none';
+            questions = [];
+            askedQuestions = [];
             fetchQuestion();
         }
 
