@@ -1,2 +1,2 @@
-# geo-quiz
-geography quiz
+# general-quiz
+general quiz game
