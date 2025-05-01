@@ -9,27 +9,25 @@ body {
     position: relative;
     height: 100vh;
     width: 100vw;
+    background-color: #e5e5f7;
+    opacity: 0.95;
+    background-image:  linear-gradient(#444cf7 2px, transparent 2px), linear-gradient(90deg, #444cf7 2px, transparent 2px), linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(90deg, #444cf7 1px, #e5e5f7 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
 
 header {
     padding: 1rem;
     width: 100%;
     text-align: center;
-    position: absolute;
-    top: 50%;
     display: flex;
     justify-content: center;
 }
 
 .text-pop-up-top {
+    color: white;
     width: min-content;
     text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
-}
-
-.q-class {
-    color: #0e4a325d; 
-    left: 10px;
-    top: -100px;
 }
 
 .quiz-container {
@@ -40,7 +38,7 @@ header {
     backdrop-filter: blur( 1.5px );
     -webkit-backdrop-filter: blur( 1.5px );
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border: 1px solid rgba( 255, 255, 255, 5.75 );
     position: absolute;
     top: 25%;
     display: flex;
@@ -48,8 +46,12 @@ header {
 }
 
 .question {
-    font-size: 1.2rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
+    font-weight: 600;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    letter-spacing: 0.15rem;
+    color: crimson;
 }
 
 .options {
@@ -59,7 +61,7 @@ header {
 
 .option {
     background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    border: 2px solid crimson;
     padding: 10px;
     margin: 5px 0;
     cursor: pointer;
@@ -68,12 +70,12 @@ header {
 }
 
 .option:hover {
-    background-color: #e0e0e0;
+    background-color: #cbcbcb;
 }
 
 .score {
     margin-top: 20px;
-    font-size: 1.2rem;
+    font-size: 2.25rem;
     font-weight: bold;
 }
 
